@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { AiOutlineCheck } from "react-icons/ai";
+import { AiOutlineCheck, AiOutlineClose } from "react-icons/ai";
 
 import "./App.css";
 
@@ -87,7 +87,11 @@ function App() {
               {task.text}
             </span>
 
-            <button onClick={() => deleteTask(task.text)}>x</button>
+            {/* <button onClick={() => deleteTask(task.text)}>x</button> */}
+            <AiOutlineClose
+              className="delete-icon"
+              onClick={() => deleteTask(task.text)}
+            />
           </li>
         ))}
       </ul>
