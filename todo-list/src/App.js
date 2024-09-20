@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { AiOutlineCheck } from "react-icons/ai";
+
 import "./App.css";
 
 function App() {
@@ -7,6 +9,9 @@ function App() {
     const savedTasks = JSON.parse(localStorage.getItem("tasks")) || [];
     return savedTasks;
   });
+  const [searchTask, setSearchTask] = useState("");
+  const totalTasks = tasks.length;
+  const completedTasks = tasks.filter((task) => task.completed).length;
 
   //to save tasks in the local storage
   useEffect(() => {
@@ -19,20 +24,37 @@ function App() {
 
   const addTask = () => {
     if (task) {
-      const newTasks = [...tasks, task];
+      const newTasks = [...tasks, { text: task, completed: false }];
       setTasks(newTasks);
       setTask("");
     }
   };
 
   const deleteTask = (taskToDelete) => {
-    const newTasks = tasks.filter((task) => task !== taskToDelete);
+    const newTasks = tasks.filter((task) => task.text !== taskToDelete);
+    setTasks(newTasks);
+  };
+
+  const filteredTasks = tasks.filter((task) =>
+    task.text.toLowerCase().includes(searchTask.toLowerCase())
+  );
+
+  const taskCompleted = (taskToComplete) => {
+    const newTasks = tasks.map((task) => {
+      if (task.text === taskToComplete) {
+        return { ...task, completed: !task.completed };
+      }
+      return task;
+    });
     setTasks(newTasks);
   };
 
   return (
     <div className="App">
       <h1>To-Do List</h1>
+      <p>
+        Has completado {completedTasks} de {totalTasks} tasks
+      </p>
       <input
         type="text"
         value={task}
@@ -41,11 +63,31 @@ function App() {
       />
       <button onClick={addTask}>Add Task</button>
 
+      <input
+        type="text"
+        placeholder="Search tasks"
+        value={searchTask}
+        onChange={(task) => setSearchTask(task.target.value)}
+      />
+
       <ul>
-        {tasks.map((task, index) => (
-          <li key={index}>
-            {task}
-            <button onClick={() => deleteTask(task)}>x</button>
+        {filteredTasks.map((task, index) => (
+          <li
+            key={index}
+            style={{ textDecoration: task.completed ? "line-through" : "none" }}
+          >
+            <span
+              style={{
+                color: task.completed ? "green" : "black",
+                cursor: "pointer",
+              }}
+              onClick={() => taskCompleted(task.text)}
+            >
+              {task.completed ? <AiOutlineCheck /> : <AiOutlineCheck />}
+              {task.text}
+            </span>
+
+            <button onClick={() => deleteTask(task.text)}>x</button>
           </li>
         ))}
       </ul>
