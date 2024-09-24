@@ -105,7 +105,7 @@ li {
 .search-icon {
   position: absolute;
   right: 30px;
-  color: gray;
+  color: rgb(47, 0, 76);
   pointer-events: none;
 }
 
@@ -145,17 +145,27 @@ li {
 }
 
 .add-task-btn {
-  background-color: #4299e1;
-  padding: 0.5rem 1rem;
+  background-color: #78069e;
+  padding: 10px 10px;
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 50%;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: transform 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.plus-icon {
+  font-size: 24px;
+  transition: transform 0.3s ease;
+}
+.add-task-btn:hover {
+  background-color: #570b84;
 }
 
-.add-task-btn:hover {
-  background-color: #2b6cb0;
+.add-task-btn:hover .plus-icon {
+  transform: rotate(90deg);
 }
 
 .delete-icon {
@@ -169,7 +179,7 @@ li {
 }
 
 .modal {
-  background-color: white;
+  background: linear-gradient(to bottom, #f56565, #f6e05e);
   padding: 2rem;
   border-radius: 10px;
   max-width: 500px;
@@ -187,4 +197,38 @@ li {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.create-task-btn {
+  background-color: #570b84;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin-right: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.create-task-btn:hover {
+  background-color: #833d96;
+}
+
+.cancel-btn {
+  background-color: #570b84;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.cancel-btn:hover {
+  background-color: #833d96;
+}
+.modal-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
 }

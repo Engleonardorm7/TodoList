@@ -4,8 +4,8 @@ import {
   AiOutlineCheck,
   AiOutlineClose,
   AiOutlineSearch,
-  FaPlus,
 } from "react-icons/ai";
+import { FaPlus } from "react-icons/fa";
 
 import "./App.css";
 
@@ -105,9 +105,8 @@ function App() {
         ))}
       </ul>
 
-      <button onClick={() => setModalIsOpen(true)} className="add-task-btn">
-        {" "}
-        +{" "}
+      <button className="add-task-btn" onClick={() => setModalIsOpen(true)}>
+        <FaPlus className="plus-icon" />
       </button>
       <Modal
         isOpen={modalIsOpen}
@@ -124,8 +123,12 @@ function App() {
           className="task-input"
         />
         <div className="modal-buttons">
-          <button onClick={addTask}>Add Task</button>
-          <button onClick={() => setModalIsOpen(false)}>Cancel</button>
+          <button className="create-task-btn" onClick={addTask}>
+            Add Task
+          </button>
+          <button className="cancel-btn" onClick={() => setModalIsOpen(false)}>
+            Cancel
+          </button>
         </div>
       </Modal>
     </div>
