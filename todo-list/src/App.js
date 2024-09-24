@@ -26,6 +26,7 @@ function App() {
   //to save tasks in the local storage
   useEffect(() => {
     localStorage.setItem("tasks", JSON.stringify(tasks));
+    document.title = "To Do List APP";
   }, [tasks]);
 
   const inputChange = (textInput) => {
@@ -82,24 +83,23 @@ function App() {
           <li
             key={index}
             className={`task-item ${task.completed ? "completed" : ""}`}
-            // style={{ textDecoration: task.completed ? "line-through" : "none" }}
+            onClick={() => taskCompleted(task.text)}
           >
-            <span
-              // style={{
-              //   color: task.completed ? "green" : "black",
-              //   cursor: "pointer",
-              // }}
-              onClick={() => taskCompleted(task.text)}
-              className="task-text"
-            >
-              {task.completed ? <AiOutlineCheck /> : <AiOutlineCheck />}
+            <span className="task-text">
+              <AiOutlineCheck
+                className={`check-icon ${
+                  task.completed ? "check-icon-rotate" : ""
+                }`}
+              />
               {task.text}
             </span>
 
-            {/* <button onClick={() => deleteTask(task.text)}>x</button> */}
             <AiOutlineClose
               className="delete-icon"
-              onClick={() => deleteTask(task.text)}
+              onClick={(e) => {
+                e.stopPropagation();
+                deleteTask(task.text);
+              }}
             />
           </li>
         ))}
@@ -126,7 +126,10 @@ function App() {
           <button className="create-task-btn" onClick={addTask}>
             Add Task
           </button>
-          <button className="cancel-btn" onClick={() => setModalIsOpen(false)}>
+          <button
+            className="cancel-btn"
+            onClick={() => setModalIsOpen(false) & setTask("")}
+          >
             Cancel
           </button>
         </div>
