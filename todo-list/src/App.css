@@ -1,4 +1,8 @@
-.App {
+/* @tailwind base;
+@tailwind componentes;
+@tailwind utilities; */
+
+/* .App {
   text-align: center;
   margin-top: 50px;
 }
@@ -78,4 +82,109 @@ li {
   left: 0;
   right: 0;
   bottom: 0;
+} */
+
+.app-container {
+  background: linear-gradient(to bottom, #f56565, #f6e05e);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  color: #2d3748;
+}
+
+.search-container {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.search-icon {
+  position: absolute;
+  right: 30px;
+  color: gray;
+  pointer-events: none;
+}
+
+.search-input,
+.task-input {
+  padding: 0.5rem;
+  margin: 1rem;
+  border: 2px solid #cbd5e0;
+  border-radius: 5px;
+  width: 80%;
+}
+
+.task-list {
+  list-style-type: none;
+  padding: 0;
+  width: 100%;
+  max-width: 600px;
+}
+.task-item {
+  background-color: #edf2f7;
+  padding: 1rem;
+  margin: 0.5rem 0;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background-color 0.3s;
+}
+
+.task-item.completed {
+  text-decoration: line-through;
+  color: green;
+}
+
+.task-item:hover {
+  background-color: #adaeb1;
+}
+
+.add-task-btn {
+  background-color: #4299e1;
+  padding: 0.5rem 1rem;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.add-task-btn:hover {
+  background-color: #2b6cb0;
+}
+
+.delete-icon {
+  color: #2d3748;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.delete-icon:hover {
+  color: red;
+}
+
+.modal {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 10px;
+  max-width: 500px;
+  width: 100%;
+  margin: 2rem auto;
+}
+
+.overlay {
+  background: rgba(0, 0, 0, 0.6);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Modal from "react-modal";
-import { AiOutlineCheck, AiOutlineClose } from "react-icons/ai";
+import {
+  AiOutlineCheck,
+  AiOutlineClose,
+  AiOutlineSearch,
+  FaPlus,
+} from "react-icons/ai";
 
 import "./App.css";
 
@@ -56,31 +61,36 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <div className="app-container">
       <h1>To-Do List</h1>
       <p>
-        Has completado {completedTasks} de {totalTasks} tasks
+        You have completed {completedTasks} of {totalTasks} tasks
       </p>
+      <div className="search-container">
+        <AiOutlineSearch className="search-icon" />
+        <input
+          type="text"
+          placeholder="Search tasks"
+          value={searchTask}
+          onChange={(task) => setSearchTask(task.target.value)}
+          className="search-input"
+        />
+      </div>
 
-      <input
-        type="text"
-        placeholder="Search tasks"
-        value={searchTask}
-        onChange={(task) => setSearchTask(task.target.value)}
-      />
-
-      <ul>
+      <ul className="task-list">
         {filteredTasks.map((task, index) => (
           <li
             key={index}
-            style={{ textDecoration: task.completed ? "line-through" : "none" }}
+            className={`task-item ${task.completed ? "completed" : ""}`}
+            // style={{ textDecoration: task.completed ? "line-through" : "none" }}
           >
             <span
-              style={{
-                color: task.completed ? "green" : "black",
-                cursor: "pointer",
-              }}
+              // style={{
+              //   color: task.completed ? "green" : "black",
+              //   cursor: "pointer",
+              // }}
               onClick={() => taskCompleted(task.text)}
+              className="task-text"
             >
               {task.completed ? <AiOutlineCheck /> : <AiOutlineCheck />}
               {task.text}
@@ -95,19 +105,23 @@ function App() {
         ))}
       </ul>
 
-      <button onClick={() => setModalIsOpen(true)}> + </button>
+      <button onClick={() => setModalIsOpen(true)} className="add-task-btn">
+        {" "}
+        +{" "}
+      </button>
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={() => setModalIsOpen(false)}
         contentLabel="add task modal"
-        className="Modal"
-        overlayClassName="Overlay"
+        className="modal"
+        overlayClassName="overlay"
       >
         <input
           type="text"
           value={task}
           onChange={inputChange}
           placeholder="Add a new task"
+          className="task-input"
         />
         <div className="modal-buttons">
           <button onClick={addTask}>Add Task</button>
