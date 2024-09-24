@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
+import Modal from "react-modal";
 import { AiOutlineCheck, AiOutlineClose } from "react-icons/ai";
 
 import "./App.css";
+
+Modal.setAppElement("#root");
 
 function App() {
   const [task, setTask] = useState();
@@ -10,6 +13,8 @@ function App() {
     return savedTasks;
   });
   const [searchTask, setSearchTask] = useState("");
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
   const totalTasks = tasks.length;
   const completedTasks = tasks.filter((task) => task.completed).length;
 
@@ -27,6 +32,7 @@ function App() {
       const newTasks = [...tasks, { text: task, completed: false }];
       setTasks(newTasks);
       setTask("");
+      setModalIsOpen(false);
     }
   };
 
@@ -55,13 +61,6 @@ function App() {
       <p>
         Has completado {completedTasks} de {totalTasks} tasks
       </p>
-      <input
-        type="text"
-        value={task}
-        onChange={inputChange}
-        placeholder="Add a new task"
-      />
-      <button onClick={addTask}>Add Task</button>
 
       <input
         type="text"
@@ -95,6 +94,26 @@ function App() {
           </li>
         ))}
       </ul>
+
+      <button onClick={() => setModalIsOpen(true)}> + </button>
+      <Modal
+        isOpen={modalIsOpen}
+        onRequestClose={() => setModalIsOpen(false)}
+        contentLabel="add task modal"
+        className="Modal"
+        overlayClassName="Overlay"
+      >
+        <input
+          type="text"
+          value={task}
+          onChange={inputChange}
+          placeholder="Add a new task"
+        />
+        <div className="modal-buttons">
+          <button onClick={addTask}>Add Task</button>
+          <button onClick={() => setModalIsOpen(false)}>Cancel</button>
+        </div>
+      </Modal>
     </div>
   );
 }
